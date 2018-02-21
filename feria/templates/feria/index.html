@@ -1,4 +1,9 @@
 {% extends 'feria/base.html' %}
+{% load static %}
+
+{% block js %}
+<script type="text/javascript" src="{% static 'feria/js/pages/dashboard.js' %}"></script>
+{% endblock %}
 
 {% block content %}
 <!-- Content area -->

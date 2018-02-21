@@ -1,0 +1,124 @@
+[
+  {
+    "model": "auth.user",
+    "pk": 1,
+    "fields": {
+      "password": "pbkdf2_sha256$100000$1Lb74i3OMTsC$eVb3rsiAlRYQXmcu7jPR46gcpY2DG8M7k1OckL5OBSs=",
+      "last_login": "2018-02-18T21:35:03.269Z",
+      "is_superuser": true,
+      "username": "orencoret",
+      "first_name": "",
+      "last_name": "",
+      "email": "",
+      "is_staff": true,
+      "is_active": true,
+      "date_joined": "2018-02-10T17:02:28.592Z",
+      "groups": [],
+      "user_permissions": []
+    }
+  },
+  {
+    "model": "auth.user",
+    "pk": 2,
+    "fields": {
+      "password": "pbkdf2_sha256$100000$R29BSM47abdS$WeEeMSN/Vobp+Ywxs6JIiJ75H99pzGcRSeANi6kkeuE=",
+      "last_login": null,
+      "is_superuser": false,
+      "username": "test1",
+      "first_name": "",
+      "last_name": "",
+      "email": "",
+      "is_staff": false,
+      "is_active": true,
+      "date_joined": "2018-02-18T21:33:48.299Z",
+      "groups": [],
+      "user_permissions": []
+    }
+  },
+  {
+    "model": "feria.event",
+    "pk": 1,
+    "fields": {
+      "name": "Feria de prueba",
+      "description": "Evento de feria de software de prueba"
+    }
+  },
+  {
+    "model": "feria.team",
+    "pk": 1,
+    "fields": {
+      "user": [
+        2
+      ],
+      "event": 1,
+      "name": "ClaseB",
+      "description": "El simulador de realidad virtual SAO"
+    }
+  },
+  {
+    "model": "feria.epic",
+    "pk": 1,
+    "fields": {
+      "team": 1,
+      "name": "Entregable de prueba",
+      "description": "1"
+    }
+  },
+  {
+    "model": "feria.feature",
+    "pk": 1,
+    "fields": {
+      "epic": 1,
+      "name": "Caracteristica de prueba",
+      "description": "Para los profes"
+    }
+  },
+  {
+    "model": "feria.task",
+    "pk": 1,
+    "fields": {
+      "feature": 1,
+      "user": 2,
+      "state": 0,
+      "name": "Task de prueba",
+      "description": "Task de prueba"
+    }
+  },
+  {
+    "model": "feria.forum",
+    "pk": 1,
+    "fields": {
+      "team": 1,
+      "name": "Foro de Prueba"
+    }
+  },
+  {
+    "model": "feria.message",
+    "pk": 1,
+    "fields": {
+      "forum": 1,
+      "user": 2,
+      "title": "Mensaje de prueba",
+      "content": "mensaje de prueba"
+    }
+  },
+  {
+    "model": "feria.answer",
+    "pk": 1,
+    "fields": {
+      "message": 1,
+      "user": 1,
+      "content": "Respuesta de prueba"
+    }
+  },
+  {
+    "model": "feria.notification",
+    "pk": 1,
+    "fields": {
+      "user": 2,
+      "message": "Notificación de prueba",
+      "n_type": 1,
+      "uri": "message/1"
+    }
+  }
+]

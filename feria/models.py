@@ -15,13 +15,13 @@ class Team(models.Model):
     event = models.ForeignKey('Event', on_delete=models.CASCADE)
     name = models.CharField(max_length=200)
     description = models.TextField()
-    logo = models.ImageField(upload_to='feria/team/logos/')
+    logo = models.ImageField(upload_to='feria/team/logos/', null=True)
 
 
 class Event(models.Model):
     name = models.CharField(max_length=200)
     description = models.TextField()
-    logo = models.ImageField(upload_to='feria/event/logos/')
+    logo = models.ImageField(upload_to='feria/event/logos/', null=True)
 
 
 class Forum(models.Model):
@@ -36,7 +36,7 @@ class Message(models.Model):
     content = models.TextField()
 
 
-class Response(models.Model):
+class Answer(models.Model):
     message = models.ForeignKey('Message', on_delete=models.CASCADE)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     content = models.TextField()
@@ -55,5 +55,18 @@ class Feature(models.Model):
 
 
 class Task(models.Model):
+    BACKLOG = 0
+    ONGOING = 1
+    DONE = 2
+    ACEPTED = 3
+    STATE_CHOICES = (
+        (BACKLOG, 'No Iniciada'),
+        (ONGOING, 'En Desarrollo'),
+        (DONE, 'Terminada'),
+        (ACEPTED, 'Aceptada'))
+
     feature = models.ForeignKey('Feature', on_delete=models.CASCADE)
-    name = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
+    user = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
+    name = models.CharField(max_length=200)
+    state = models.PositiveSmallIntegerField(choices=STATE_CHOICES)
+    description = models.TextField()
