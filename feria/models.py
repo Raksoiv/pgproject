@@ -68,5 +68,7 @@ class Task(models.Model):
     feature = models.ForeignKey('Feature', on_delete=models.CASCADE)
     user = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
     name = models.CharField(max_length=200)
-    state = models.PositiveSmallIntegerField(choices=STATE_CHOICES)
+    state = models.PositiveSmallIntegerField(
+        choices=STATE_CHOICES,
+        default=BACKLOG)
     description = models.TextField()

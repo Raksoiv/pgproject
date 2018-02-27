@@ -1,0 +1,32 @@
+{% extends 'feria/base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="content">
+    <div class="panel panel-flat">
+        <div class="panel-heading">
+            <h5>Work Breakdown Structure (WBS)</h5>
+        </div>
+    </div>
+    <div class="panel panel-flat">
+        <div class="panel-heading">EPIC de Prueba</div>
+        <div class="panel-body">
+            <p>Descripción de la EPIC de prueba</p>
+            <div class="panel panel-flat">
+                <div class="panel-heading">Feature de Prueba</div>
+                <div class="panel-body">Descripción de la feature de prueba</div>
+            </div>
+            <div class="panel panel-flat">
+                <div class="panel-heading">Feature de Prueba 2</div>
+                <div class="panel-body">Descripción de la feature de prueba 2</div>
+            </div>
+        </div>
+    </div>
+    <div class="panel panel-flat">
+        <div class="panel-heading">Nueva EPIC</div>
+        <div class="panel-body">
+            <button class="btn btn-primary"><i class="icon-plus-circle2"></i></button>
+        </div>
+    </div>
+</div>
+{% endblock %}

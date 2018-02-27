@@ -6,4 +6,6 @@ urlpatterns = [
     path('login/', views.login_view),
     path('logout/', views.logout_view),
     path('tablero/', views.board),
+    path('wbs/', views.wbs),
+    path('foros/', views.forum),
 ]
