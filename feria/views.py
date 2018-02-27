@@ -119,3 +119,7 @@ def forum(request):
     return render(request, 'feria/forum.html', {
         'forum': 'active',
         'forums': request.user.team_set.all()[0].forum})
+
+
+def archivos(request):
+    return render(request, 'feria/filesystem.html', {'filesystem': 'active'})

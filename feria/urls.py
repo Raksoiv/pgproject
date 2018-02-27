@@ -8,4 +8,5 @@ urlpatterns = [
     path('tablero/', views.board),
     path('wbs/', views.wbs),
     path('foros/', views.forum),
+    path('archivos/', views.archivos)
 ]
