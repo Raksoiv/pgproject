@@ -11,12 +11,14 @@
         <div class="panel-heading">
             <h5>Tablero</h5>
         </div>
-        <div class="panel-body">
-            Lista de tareas por hacer
-        </div>
+    </div>
+    <div class="panel panel-flat">
         <div class="table-responsive">
-            <table class="table table-columned">
+            <table class="table table-columned text-center">
                 <thead>
+                    <tr>
+                        <th colspan="4">EPIC 1</th>
+                    </tr>
                     <tr>
                         <th>No Iniciada</th>
                         <th>En Progreso</th>
@@ -25,6 +27,286 @@
                     </tr>
                 </thead>
                 <tbody>
+                    <tr>
+                        <th colspan="4" style="border-bottom: 1px solid #bbb;border-top: 1px solid #bbb;">Feature 1</td>
+                    </tr>
+                    <tr>
+                        <td width="300" class="column-sortable">
+                            <div class="panel panel-flat">
+                                <div class="panel-heading">
+                                    <h6 class="panel-title">Nueva Tarea</h6>
+                                    <div class="heading-elements">
+                                    </div>
+                                </div>
+                                <div class="panel-body text-center">
+                                    <a href=""><i class="icon-plus-circle2"></i></a>
+                                </div>
+                            </div>
+                            {% for task in backlog %}
+                            <div class="panel panel-default panel-bordered">
+                                <div class="panel-heading">
+                                    <h6 class="panel-title">{{ task.name }}</h6>
+                                    <div class="heading-elements">
+                                        <a href="#"><i class="icon-pencil7"></i></a>
+                                    </div>
+                                </div>
+                                <div class="panel-body">
+                                    <div>{{ task.description }}</div>
+                                    <div class="content-group-sm">
+                                        <div class="progress progress-xxs">
+                                            <div class="progress-bar progress-bar-success" style="width: 75%;"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            {% endfor %}
+                        </td>
+                        <td width="300" class="column-sortable">
+                            {% for task in in_progress %}
+                            <div class="panel panel-default panel-bordered">
+                                <div class="panel-heading">
+                                    <h6 class="panel-title">{{ task.name }}</h6>
+                                </div>
+                                <div class="panel-body">
+                                    <div>{{ task.description }}</div>
+                                    <div class="content-group-sm">
+                                        <div class="progress progress-xxs">
+                                            <div class="progress-bar progress-bar-success" style="width: 75%;"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            {% endfor %}
+                        </td>
+                        <td width="300" class="column-sortable">
+                            {% for task in done %}
+                            <div class="panel panel-default panel-bordered">
+                                <div class="panel-heading">
+                                    <h6 class="panel-title">{{ task.name }}</h6>
+                                </div>
+                                <div class="panel-body">
+                                    <div>{{ task.description }}</div>
+                                    <div class="content-group-sm">
+                                        <div class="progress progress-xxs">
+                                            <div class="progress-bar progress-bar-success" style="width: 75%;"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            {% endfor %}
+                        </td>
+                        <td width="300" class="column-sortable">
+                            {% for task in acepted %}
+                            <div class="panel panel-default panel-bordered">
+                                <div class="panel-heading">
+                                    <h6 class="panel-title">{{ task.name }}</h6>
+                                </div>
+                                <div class="panel-body">
+                                    <div>{{ task.description }}</div>
+                                    <div class="content-group-sm">
+                                        <div class="progress progress-xxs">
+                                            <div class="progress-bar progress-bar-success" style="width: 75%;"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            {% endfor %}
+                        </td>
+                    </tr>
+                    <tr>
+                        <th colspan="4" style="border-bottom: 1px solid #bbb;border-top: 1px solid #bbb;">Feature 2</th>
+                    </tr>
+                    <tr>
+                        <td width="300" class="column-sortable">
+                            <div class="panel panel-flat">
+                                <div class="panel-heading">
+                                    <h6 class="panel-title">Nueva Tarea</h6>
+                                    <div class="heading-elements">
+                                    </div>
+                                </div>
+                                <div class="panel-body text-center">
+                                    <a href=""><i class="icon-plus-circle2"></i></a>
+                                </div>
+                            </div>
+                            {% for task in backlog %}
+                            <div class="panel panel-default panel-bordered">
+                                <div class="panel-heading">
+                                    <h6 class="panel-title">{{ task.name }}</h6>
+                                    <div class="heading-elements">
+                                        <a href="#"><i class="icon-pencil7"></i></a>
+                                    </div>
+                                </div>
+                                <div class="panel-body">
+                                    <div>{{ task.description }}</div>
+                                    <div class="content-group-sm">
+                                        <div class="progress progress-xxs">
+                                            <div class="progress-bar progress-bar-success" style="width: 75%;"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            {% endfor %}
+                        </td>
+                        <td width="300" class="column-sortable">
+                            {% for task in in_progress %}
+                            <div class="panel panel-default panel-bordered">
+                                <div class="panel-heading">
+                                    <h6 class="panel-title">{{ task.name }}</h6>
+                                </div>
+                                <div class="panel-body">
+                                    <div>{{ task.description }}</div>
+                                    <div class="content-group-sm">
+                                        <div class="progress progress-xxs">
+                                            <div class="progress-bar progress-bar-success" style="width: 75%;"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            {% endfor %}
+                        </td>
+                        <td width="300" class="column-sortable">
+                            {% for task in done %}
+                            <div class="panel panel-default panel-bordered">
+                                <div class="panel-heading">
+                                    <h6 class="panel-title">{{ task.name }}</h6>
+                                </div>
+                                <div class="panel-body">
+                                    <div>{{ task.description }}</div>
+                                    <div class="content-group-sm">
+                                        <div class="progress progress-xxs">
+                                            <div class="progress-bar progress-bar-success" style="width: 75%;"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            {% endfor %}
+                        </td>
+                        <td width="300" class="column-sortable">
+                            {% for task in acepted %}
+                            <div class="panel panel-default panel-bordered">
+                                <div class="panel-heading">
+                                    <h6 class="panel-title">{{ task.name }}</h6>
+                                </div>
+                                <div class="panel-body">
+                                    <div>{{ task.description }}</div>
+                                    <div class="content-group-sm">
+                                        <div class="progress progress-xxs">
+                                            <div class="progress-bar progress-bar-success" style="width: 75%;"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            {% endfor %}
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="panel panel-flat">
+        <div class="table-responsive">
+            <table class="table table-columned text-center">
+                <thead>
+                    <tr>
+                        <th colspan="4">EPIC 2</th>
+                    </tr>
+                    <tr>
+                        <th>No Iniciada</th>
+                        <th>En Progreso</th>
+                        <th>Finalizada</th>
+                        <th>Aceptada</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <th colspan="4" style="border-bottom: 1px solid #bbb;border-top: 1px solid #bbb;">Feature 1</td>
+                    </tr>
+                    <tr>
+                        <td width="300" class="column-sortable">
+                            <div class="panel panel-flat">
+                                <div class="panel-heading">
+                                    <h6 class="panel-title">Nueva Tarea</h6>
+                                    <div class="heading-elements">
+                                    </div>
+                                </div>
+                                <div class="panel-body text-center">
+                                    <a href=""><i class="icon-plus-circle2"></i></a>
+                                </div>
+                            </div>
+                            {% for task in backlog %}
+                            <div class="panel panel-default panel-bordered">
+                                <div class="panel-heading">
+                                    <h6 class="panel-title">{{ task.name }}</h6>
+                                    <div class="heading-elements">
+                                        <a href="#"><i class="icon-pencil7"></i></a>
+                                    </div>
+                                </div>
+                                <div class="panel-body">
+                                    <div>{{ task.description }}</div>
+                                    <div class="content-group-sm">
+                                        <div class="progress progress-xxs">
+                                            <div class="progress-bar progress-bar-success" style="width: 75%;"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            {% endfor %}
+                        </td>
+                        <td width="300" class="column-sortable">
+                            {% for task in in_progress %}
+                            <div class="panel panel-default panel-bordered">
+                                <div class="panel-heading">
+                                    <h6 class="panel-title">{{ task.name }}</h6>
+                                </div>
+                                <div class="panel-body">
+                                    <div>{{ task.description }}</div>
+                                    <div class="content-group-sm">
+                                        <div class="progress progress-xxs">
+                                            <div class="progress-bar progress-bar-success" style="width: 75%;"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            {% endfor %}
+                        </td>
+                        <td width="300" class="column-sortable">
+                            {% for task in done %}
+                            <div class="panel panel-default panel-bordered">
+                                <div class="panel-heading">
+                                    <h6 class="panel-title">{{ task.name }}</h6>
+                                </div>
+                                <div class="panel-body">
+                                    <div>{{ task.description }}</div>
+                                    <div class="content-group-sm">
+                                        <div class="progress progress-xxs">
+                                            <div class="progress-bar progress-bar-success" style="width: 75%;"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            {% endfor %}
+                        </td>
+                        <td width="300" class="column-sortable">
+                            {% for task in acepted %}
+                            <div class="panel panel-default panel-bordered">
+                                <div class="panel-heading">
+                                    <h6 class="panel-title">{{ task.name }}</h6>
+                                </div>
+                                <div class="panel-body">
+                                    <div>{{ task.description }}</div>
+                                    <div class="content-group-sm">
+                                        <div class="progress progress-xxs">
+                                            <div class="progress-bar progress-bar-success" style="width: 75%;"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            {% endfor %}
+                        </td>
+                    </tr>
+                    <tr>
+                        <th colspan="4" style="border-bottom: 1px solid #bbb;border-top: 1px solid #bbb;">Feature 2</th>
+                    </tr>
                     <tr>
                         <td width="300" class="column-sortable">
                             <div class="panel panel-flat">
