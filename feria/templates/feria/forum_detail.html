@@ -1,0 +1,73 @@
+{% extends 'feria/base.html' %}
+{% load static %}
+
+{% block js %}
+<script type="text/javascript" src="{% static 'feria/js/plugins/editors/summernote/summernote.min.js' %}"></script>
+<script type="text/javascript" src="{% static 'feria/js/plugins/forms/styling/uniform.min.js' %}"></script>
+<script type="text/javascript">
+    $(function() {
+        $('.summernote').summernote();
+    });
+
+    function activate_form() {
+        $('form').show();
+    }
+</script>
+{% endblock %}
+
+{% block content %}
+<div class="page-header">
+    <div class="page-header-content">
+        <div class="page-title">
+            <h4>
+                <span class="text-semibold">
+                    <a href="/foros/" style="color: black;">Foros</a>
+                </span> - <a href="/foros/{{ f.id }}/" style="color: black;">{{ f.name }}</a>
+            </h4>
+        </div>
+        <div class="heading-elements">
+            <div class="heading-btn-group">
+                <button type="button" class="btn btn-primary legitRipple" onclick="activate_form();">Nuevo Mensaje</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="content">
+    <div class="row">
+        {% for m in f.message_set.all %}
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h6>
+                    <a href="/foros/mensaje/{{ m.id }}/" class="text-bold">{{ m.title }}</a>
+                </h6>
+            </div>
+            <div class="panel-body">
+                {{ m.content|safe }}
+                {% if m.answer_set.all %}
+                <div class="panel panel-plain mt-20">
+                    <div class="panel-heading">
+                        <span class="text-semibold">{{ m.answer_set.all.0.user.username }}</span><span class="text-muted"> - {{ m.answer_set.all.0.updated_at }}</span>
+                    </div>
+                    <div class="panel-body">
+                        {{ m.answer_set.all.0.content|safe }}
+                    </div>
+                </div>
+                {% endif %}
+            </div>
+        </div>
+        {% endfor %}
+        <form method="POST" style="display: none;">
+            {% csrf_token %}
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <input type="text" class="form-control" name="title" placeholder="Titúlo">
+                </div>
+                <div class="panel-body">
+                    <textarea class="summernote" name="nessage_text"></textarea>
+                    <button type="submit" class="btn btn-primary legitRipple">Enviar</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}

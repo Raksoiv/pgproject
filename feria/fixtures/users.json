@@ -1,0 +1,92 @@
+[
+  {
+    "model": "auth.user",
+    "pk": 1,
+    "fields": {
+      "password": "pbkdf2_sha256$100000$sZBqfkkzeXQe$wI+DPRa+oM0K+PT8P3mqAgYcxsM9Z49l9kBCU/3FvL0=",
+      "last_login": "2018-04-11T01:33:42.677Z",
+      "is_superuser": true,
+      "username": "orencoret",
+      "first_name": "",
+      "last_name": "",
+      "email": "",
+      "is_staff": true,
+      "is_active": true,
+      "date_joined": "2018-04-10T23:44:25.664Z",
+      "groups": [],
+      "user_permissions": []
+    }
+  },
+  {
+    "model": "auth.user",
+    "pk": 2,
+    "fields": {
+      "password": "pbkdf2_sha256$100000$ypM5XBCxl8n6$Jj7XCtcyQc0fLItS2boKfI2xgPrYpG5BRmacd6nlIfA=",
+      "last_login": null,
+      "is_superuser": false,
+      "username": "profes",
+      "first_name": "",
+      "last_name": "",
+      "email": "",
+      "is_staff": false,
+      "is_active": true,
+      "date_joined": "2018-04-11T01:34:20.352Z",
+      "groups": [],
+      "user_permissions": []
+    }
+  },
+  {
+    "model": "auth.user",
+    "pk": 3,
+    "fields": {
+      "password": "pbkdf2_sha256$100000$ERF5jGd459tr$+7JwIOIxgF9SGpqzdiB3yOou6xZC5jZ+V0O31lULn+0=",
+      "last_login": null,
+      "is_superuser": false,
+      "username": "ayudantes",
+      "first_name": "",
+      "last_name": "",
+      "email": "",
+      "is_staff": false,
+      "is_active": true,
+      "date_joined": "2018-04-11T01:38:17.705Z",
+      "groups": [],
+      "user_permissions": []
+    }
+  },
+  {
+    "model": "auth.user",
+    "pk": 4,
+    "fields": {
+      "password": "pbkdf2_sha256$100000$aiVCg4eyKVuF$Xis7rbmanxey4176rW9FwvJ3vxpFQBjobRpV4fKYgWY=",
+      "last_login": null,
+      "is_superuser": false,
+      "username": "alumno1",
+      "first_name": "",
+      "last_name": "",
+      "email": "",
+      "is_staff": false,
+      "is_active": true,
+      "date_joined": "2018-04-11T02:09:51.452Z",
+      "groups": [],
+      "user_permissions": []
+    }
+  },
+  {
+    "model": "auth.user",
+    "pk": 5,
+    "fields": {
+      "password": "pbkdf2_sha256$100000$4qh8kBnQUI7F$RJDyDXxhU1TEiZAVTaPqanBjcwkcqhGFPgkmuCA9cqY=",
+      "last_login": null,
+      "is_superuser": false,
+      "username": "alumno2",
+      "first_name": "",
+      "last_name": "",
+      "email": "",
+      "is_staff": false,
+      "is_active": true,
+      "date_joined": "2018-04-11T02:10:03.638Z",
+      "groups": [],
+      "user_permissions": []
+    }
+  }
+]

@@ -71,54 +71,67 @@ def board(request):
 
 
 @login_required
-def wbs(request):
+def epics(request):
     if request.method == 'POST':
-        if request.POST.get('epic'):
-            team = request.user.team_set.all()[0]
-            name = request.POST.get('name')
-            description = request.POST.get('description')
-            if request.POST.get('epic_id'):
-                pk = request.POST.get('epic_id')
-                models.Epic.filter(id=pk).update(
-                    team=team,
-                    name=name,
-                    description=description)
-            else:
-                new_epic = models.Epic(
-                    team=team,
-                    name=name,
-                    description=description)
-                new_epic.save()
-        if request.POST.get('feature'):
-            epic_id = request.POST.get('epic_id')
-            epic = models.Epic.objects.get(pk=epic_id)
-            name = request.POST.get('name')
-            description = request.POST.get('description')
-            if request.POST.get('feature_id'):
-                pk = request.POST.get('feature_id')
-                models.Feature.objects.filter(id=pk).update(
-                    epic=epic,
-                    name=name,
-                    description=description)
-            else:
-                new_feature = models.Feature(
-                    epic=epic,
-                    name=name,
-                    description=description)
-                new_feature.save()
-    epics = models.Epic.objects.filter(
-        team=request.user.team_set.all()[0])
+        e = models.Epic.objects.get(pk=request.POST.get('id'))
+        e.name = request.POST.get('name')
+        e.description = request.POST.get('description')
+        e.save()
+    return render(request, 'feria/epics.html', {
+        'epics': 'active',
+    })
 
-    return render(request, 'feria/wbs.html', {
-        'wbs': 'active',
-        'epics': epics
+
+def epic_detail(request, epic_id):
+    return render(request, 'feria/epic_detail.html', {
+            'e': models.Epic.objects.get(pk=epic_id),
         })
 
 
 def forum(request):
-    return render(request, 'feria/forum.html', {
-        'forum': 'active',
-        'forums': request.user.team_set.all()[0].forum})
+    return render(
+        request,
+        'feria/forum.html', {
+            'forum': 'active',
+            'user_forums':
+                list(models.Forum.objects.filter(public=True))
+                + list(t.forum for t in request.user.team_set.all())
+        })
+
+
+def forum_detail(request, forum_id):
+    f = models.Forum.objects.get(pk=forum_id)
+    if request.method == 'POST':
+        new_message = models.Message(
+            forum=f,
+            user=request.user,
+            title=request.POST['title'],
+            content=request.POST['nessage_text'])
+        new_message.save()
+    return render(
+        request,
+        'feria/forum_detail.html', {
+            'forum': 'active',
+            'f': f,
+        })
+
+
+def message_detail(request, message_id):
+    message = models.Message.objects.get(pk=message_id)
+    if request.method == 'POST':
+        new_answer = models.Answer(
+            message=message,
+            user=request.user,
+            content=request.POST['nessage_text'],
+            )
+        new_answer.save()
+    return render(
+        request,
+        'feria/message_detail.html', {
+            'forum': 'active',
+            'm': message,
+            'answers': message.answer_set.all().order_by('created_at')
+        })
 
 
 def archivos(request):

@@ -3,13 +3,6 @@ from django.contrib.auth.models import User
 
 
 # Create your models here.
-class Notification(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
-    message = models.CharField(max_length=200)
-    n_type = models.PositiveSmallIntegerField()
-    uri = models.CharField(max_length=200)
-
-
 class Team(models.Model):
     user = models.ManyToManyField(User)
     event = models.ForeignKey('Event', on_delete=models.CASCADE)
@@ -25,33 +18,58 @@ class Event(models.Model):
 
 
 class Forum(models.Model):
-    team = models.OneToOneField('Team', on_delete=models.CASCADE)
+    team = models.OneToOneField('Team', on_delete=models.CASCADE, null=True)
     name = models.CharField(max_length=200)
+    public = models.BooleanField()
 
 
 class Message(models.Model):
+    class Meta:
+        ordering = ['-updated_at']
+
     forum = models.ForeignKey('Forum', on_delete=models.CASCADE)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     title = models.CharField(max_length=200)
     content = models.TextField()
 
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
 
 class Answer(models.Model):
+    class Meta:
+        ordering = ['-updated_at']
+
     message = models.ForeignKey('Message', on_delete=models.CASCADE)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     content = models.TextField()
 
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
 
 class Epic(models.Model):
+    class Meta:
+        ordering = ['id']
+
     team = models.ForeignKey('Team', on_delete=models.CASCADE)
     name = models.CharField(max_length=200)
     description = models.TextField()
 
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
 
 class Feature(models.Model):
+    class Meta:
+        ordering = ['-updated_at']
+
     epic = models.ForeignKey('Epic', on_delete=models.CASCADE)
     name = models.CharField(max_length=200)
     description = models.TextField()
+
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
 
 
 class Task(models.Model):
@@ -72,3 +90,6 @@ class Task(models.Model):
         choices=STATE_CHOICES,
         default=BACKLOG)
     description = models.TextField()
+
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)

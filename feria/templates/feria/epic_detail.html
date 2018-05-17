@@ -1,0 +1,45 @@
+{% extends 'feria/base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="page-header">
+    <div class="page-header-content">
+        <div class="page-title">
+            <h4>
+                <span class="text-semibold"><a href="/entregas/" style="color: black;">Entregas</a></span> - {{ e.name }}
+            </h4>
+        </div>
+    </div>
+</div>
+<div class="content">
+    <div class="row">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h6><a href="/entregas/{{ e.id }}/">{{ e.name|title }}</a> &#183; <span class="text-muted">{{e.team.name}}</span></h6>
+                <div class="heading-elements">
+                    <button type="button" class="btn btn-primary heading-btn legitRipple">Editar</button>
+                </div>
+            </div>
+            <div class="panel-body">
+                <div class="content" style="padding-bottom: 40px;">{{ e.description|safe }}</div>
+                {% if e.feature_set.all %}
+                <div class="row">
+                    {% for f in e.feature_set.all %}
+                    <div class="col-md-4">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h6><a href="/caracteristicas/{{f.id}}/">{{f.name}}</a></h6>
+                            </div>
+                            <div class="panel-body">
+                                {{ f.description|safe }}
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

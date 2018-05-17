@@ -7,6 +7,7 @@
     <title>PG Project Management</title>
 
     {% load static %}
+    {% load base_tags %}
     <!-- Global stylesheets -->
     <link href="https://fonts.googleapis.com/css?family=Roboto:400,300,100,500,700,900" rel="stylesheet" type="text/css">
     <link href="{% static 'feria/css/icons/icomoon/styles.css' %}" rel="stylesheet" type="text/css">
@@ -61,7 +62,7 @@
             </ul>
 
             <div class="navbar-right">
-                <p class="navbar-text">Buen día, Usuario</p>
+                <p class="navbar-text">Buen día, {{request.user.username|title}}</p>
                 <p class="navbar-text"><span class="label bg-success">En Línea</span></p>
                 
                 <ul class="nav navbar-nav">             
@@ -182,8 +183,7 @@
                         <div class="category-content">
                             <div class="sidebar-user-material-content">
                                 <a href="#"><img src="{% static 'feria/images/placeholder.jpg' %}" class="img-circle img-responsive" alt=""></a>
-                                <h6>{{ request.user.username }}</h6>
-                                <span class="text-size-small">UTFSM, Valparaíso</span>
+                                <h6>{{ request.user.username|title }}</h6>
                             </div>
                         </div>
                     </div>
@@ -197,10 +197,34 @@
 
                                 <!-- Main -->
                                 <li class="navigation-header"><span>Principal</span> <i class="icon-menu" title="Main pages"></i></li>
-                                <li class="{{ dashboard }}"><a href="/"><i class="icon-home4"></i> <span>Dashboard</span></a></li>
+                                <li class="{{ dashboard }}"><a href="/"><i class="icon-home4"></i> <span>Home</span></a></li>
                                 <li class="{{ board }}"><a href="/tablero/"><i class="icon-grid6"></i> <span>Tablero</span></a></li>
-                                <li class="{{ wbs }}"><a href="/wbs/"><i class="icon-list-unordered"></i> <span>WBS</span></a></li>
-                                <li class="{{ forum }}"><a href="/foros/"><i class="icon-envelop2"></i> <span>Foros</span></a></li>
+                                <li class="{{ epics }}"><a href="/entregas/"><i class="icon-list-unordered"></i> <span>Entregas</span></a>
+                                    <ul>
+                                        <li class="{{ epics }}"><a href="/entregas/">Todas</a></li>
+                                        {% for t in request.user.team_set.all %}
+                                        {% for ep in t.epic_set.all %}
+                                        <li class="{% if ep.id == e.id %}active{% endif %}"><a href="/entregas/{{ep.id}}/">{{ ep.name }}</a></li>
+                                        {% endfor %}
+                                        {% endfor %}
+                                    </ul>
+                                </li>
+                                <li class="{{ forum }}"><a href="/foros/" class="has-ul legitRipple"><i class="icon-envelop2"></i> <span>Foros</span></a>
+                                    <ul>
+                                        <li class="{{ forum }}"><a href="/foros/">Todos</a></li>
+                                        {% public_forums as forums %}
+                                        {% for fo in forums %}
+                                        <li {% if fo.name == f.name %} class="active" {% endif %}>
+                                            <a href="/foros/{{fo.id}}/">{{ fo.name }}</a>
+                                        </li>
+                                        {% endfor %}
+                                        {% for t in request.user.team_set.all %}
+                                        <li {% if t.forum.name == f.name %} class="active" {% endif %}>
+                                            <a href="/foros/{{t.forum.id}}/">{{ t.forum.name }}</a>
+                                        </li>
+                                        {% endfor %}
+                                    </ul>
+                                </li>
                                 <li class="{{ filesystem }}"><a href="/archivos/"><i class="icon-files-empty"></i> <span>Archivos</span></a></li>
                             </ul>
                         </div>

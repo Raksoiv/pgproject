@@ -2,34 +2,40 @@
 {% load static %}
 
 {% block content %}
-<div class="content">
-    <div class="panel panel-flat">
-        <div class="panel-heading">
-            <h5>Foros</h5>
+<div class="page-header">
+    <div class="page-header-content">
+        <div class="page-title">
+            <h4>
+                <span class="text-semibold"><a href="/foros/" style="color: black;">Foros</a></span>
+            </h4>
         </div>
     </div>
-    <div class="panel panel-flat">
-        <div class="panel-heading">Anuncios</div>
-        <div class="panel-body">
-            <div class="panel panel-flat">
-                <div class="panel-heading">Mensaje de Prueba</div>
-                <div class="panel-body">
-                    <p>Contenido del mensaje de prueba</p>
-                    <div class="panel panel-flat">
-                        <div class="panel panel-body">Última respuesta de prueba</div>
-                    </div>
+</div>
+<div class="content">
+    <div class="row">
+        {% for f in user_forums %}
+        <div class="col-md-6">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h6>
+                        <a href="/foros/{{ f.id }}/" class="text-bold">{{ f.name|title }}</a>
+                    </h6>
                 </div>
-            </div>
-            <div class="panel panel-flat">
-                <div class="panel-heading">Mensaje de Prueba</div>
                 <div class="panel-body">
-                    <p>Contenido del mensaje de prueba</p>
-                    <div class="panel panel-flat">
-                        <div class="panel panel-body">Última respuesta de prueba</div>
+                    {% if f.message_set.all %}
+                    <div class="panel panel-plain">
+                        <div class="panel-heading">
+                            <a href="/foros/mensaje/{{ f.message_set.all.0.id }}/" class="text-semibold">{{ f.message_set.all.0.title }}</a>
+                        </div>
+                        <div class="panel-body">
+                            {{ f.message_set.all.0.content|safe }}
+                        </div>
                     </div>
+                    {% endif %}
                 </div>
             </div>
         </div>
+        {% endfor %}
     </div>
 </div>
 {% endblock %}

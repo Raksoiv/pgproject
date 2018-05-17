@@ -1,46 +1,10 @@
 [
   {
-    "model": "auth.user",
-    "pk": 1,
-    "fields": {
-      "password": "pbkdf2_sha256$100000$1Lb74i3OMTsC$eVb3rsiAlRYQXmcu7jPR46gcpY2DG8M7k1OckL5OBSs=",
-      "last_login": "2018-02-18T21:35:03.269Z",
-      "is_superuser": true,
-      "username": "orencoret",
-      "first_name": "",
-      "last_name": "",
-      "email": "",
-      "is_staff": true,
-      "is_active": true,
-      "date_joined": "2018-02-10T17:02:28.592Z",
-      "groups": [],
-      "user_permissions": []
-    }
-  },
-  {
-    "model": "auth.user",
-    "pk": 2,
-    "fields": {
-      "password": "pbkdf2_sha256$100000$R29BSM47abdS$WeEeMSN/Vobp+Ywxs6JIiJ75H99pzGcRSeANi6kkeuE=",
-      "last_login": null,
-      "is_superuser": false,
-      "username": "test1",
-      "first_name": "",
-      "last_name": "",
-      "email": "",
-      "is_staff": false,
-      "is_active": true,
-      "date_joined": "2018-02-18T21:33:48.299Z",
-      "groups": [],
-      "user_permissions": []
-    }
-  },
-  {
     "model": "feria.event",
     "pk": 1,
     "fields": {
-      "name": "Feria de prueba",
-      "description": "Evento de feria de software de prueba"
+      "name": "Feria de Prueba 2018",
+      "description": "Evento de feria de software de prueba donde se puede jugar"
     }
   },
   {
@@ -48,40 +12,27 @@
     "pk": 1,
     "fields": {
       "user": [
+        4,
+        3,
         2
       ],
       "event": 1,
       "name": "ClaseB",
-      "description": "El simulador de realidad virtual SAO"
+      "description": "El simulador de realidad virtual de SAO"
     }
   },
   {
-    "model": "feria.epic",
-    "pk": 1,
+    "model": "feria.team",
+    "pk": 2,
     "fields": {
-      "team": 1,
-      "name": "Entregable de prueba",
-      "description": "1"
-    }
-  },
-  {
-    "model": "feria.feature",
-    "pk": 1,
-    "fields": {
-      "epic": 1,
-      "name": "Caracteristica de prueba",
-      "description": "Para los profes"
-    }
-  },
-  {
-    "model": "feria.task",
-    "pk": 1,
-    "fields": {
-      "feature": 1,
-      "user": 2,
-      "state": 0,
-      "name": "Task de prueba",
-      "description": "Task de prueba"
+      "user": [
+        5,
+        3,
+        2
+      ],
+      "event": 1,
+      "name": "PG Project",
+      "description": "El Project Manager de Godoy"
     }
   },
   {
@@ -89,17 +40,45 @@
     "pk": 1,
     "fields": {
       "team": 1,
-      "name": "Foro de Prueba"
+      "name": "ClaseB",
+      "public": false
+    }
+  },
+  {
+    "model": "feria.forum",
+    "pk": 2,
+    "fields": {
+      "name": "Anuncios",
+      "public": true
+    }
+  },
+  {
+    "model": "feria.forum",
+    "pk": 3,
+    "fields": {
+      "name": "Consultas",
+      "public": true
+    }
+  },
+  {
+    "model": "feria.forum",
+    "pk": 4,
+    "fields": {
+      "team": 2,
+      "name": "PG Project",
+      "public": false
     }
   },
   {
     "model": "feria.message",
     "pk": 1,
     "fields": {
-      "forum": 1,
+      "forum": 2,
       "user": 2,
-      "title": "Mensaje de prueba",
-      "content": "mensaje de prueba"
+      "title": "Bienvenida Feria 2018",
+      "content": "Estimados alumnos bienvenidos a la feria 2018",
+      "created_at": "2018-03-25T15:20-03:00",
+      "updated_at": "2018-03-25T15:20-03:00"
     }
   },
   {
@@ -107,18 +86,89 @@
     "pk": 1,
     "fields": {
       "message": 1,
-      "user": 1,
-      "content": "Respuesta de prueba"
+      "user": 3,
+      "content": "Esperamos que sea una gran feria",
+      "created_at": "2018-03-26T15:20-03:00",
+      "updated_at": "2018-03-26T15:20-03:00"
     }
   },
   {
-    "model": "feria.notification",
+    "model": "feria.answer",
+    "pk": 2,
+    "fields": {
+      "message": 1,
+      "user": 4,
+      "content": "Muchas Gracias",
+      "created_at": "2018-04-01T15:20-03:00",
+      "updated_at": "2018-04-01T15:20-03:00"
+    }
+  },
+  {
+    "model": "feria.answer",
+    "pk": 3,
+    "fields": {
+      "message": 1,
+      "user": 5,
+      "content": "Muchas Gracias <3",
+      "created_at": "2018-04-01T18:20-03:00",
+      "updated_at": "2018-04-01T18:20-03:00"
+    }
+  },
+  {
+    "model": "feria.message",
+    "pk": 2,
+    "fields": {
+      "forum": 1,
+      "user": 4,
+      "title": "Consulta de VR",
+      "content": "No entiendo Na",
+      "created_at": "2018-03-25T15:20-03:00",
+      "updated_at": "2018-03-25T15:20-03:00"
+    }
+  },
+  {
+    "model": "feria.message",
+    "pk": 3,
+    "fields": {
+      "forum": 3,
+      "user": 5,
+      "title": "Los puntos del documento son inconsistentes",
+      "content": "hagan bien la pega po",
+      "created_at": "2018-03-25T15:20-03:00",
+      "updated_at": "2018-03-25T15:20-03:00"
+    }
+  },
+  {
+    "model": "feria.epic",
     "pk": 1,
     "fields": {
-      "user": 2,
-      "message": "Notificación de prueba",
-      "n_type": 1,
-      "uri": "message/1"
+      "team": 1,
+      "name": "Entrega 1",
+      "description": "<p>La entrega 1</p>",
+      "created_at": "2018-03-25T15:20-03:00",
+      "updated_at": "2018-03-25T15:20-03:00"
+    }
+  },
+  {
+    "model": "feria.feature",
+    "pk": 1,
+    "fields": {
+      "epic": 1,
+      "name": "Caracteristica 1",
+      "description": "<p>Caracteristica 1</p>",
+      "created_at": "2018-03-25T15:20-03:00",
+      "updated_at": "2018-03-25T15:20-03:00"
+    }
+  },
+  {
+    "model": "feria.feature",
+    "pk": 2,
+    "fields": {
+      "epic": 1,
+      "name": "Caracteristica 2",
+      "description": "<p>Caracteristica 2</p>",
+      "created_at": "2018-03-25T15:20-03:00",
+      "updated_at": "2018-03-25T15:20-03:00"
     }
   }
 ]
