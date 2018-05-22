@@ -155,6 +155,7 @@
     "fields": {
       "epic": 1,
       "name": "Caracteristica 1",
+      "criteria": "Criterio de Aceptación de la Caracteristica 1",
       "description": "<p>Caracteristica 1</p>",
       "created_at": "2018-03-25T15:20-03:00",
       "updated_at": "2018-03-25T15:20-03:00"
@@ -166,6 +167,7 @@
     "fields": {
       "epic": 1,
       "name": "Caracteristica 2",
+      "criteria": "Criterio de Aceptación de la Caracteristica 2",
       "description": "<p>Caracteristica 2</p>",
       "created_at": "2018-03-25T15:20-03:00",
       "updated_at": "2018-03-25T15:20-03:00"

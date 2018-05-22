@@ -201,11 +201,25 @@
                                 <li class="{{ board }}"><a href="/tablero/"><i class="icon-grid6"></i> <span>Tablero</span></a></li>
                                 <li class="{{ epics }}"><a href="/entregas/"><i class="icon-list-unordered"></i> <span>Entregas</span></a>
                                     <ul>
-                                        <li class="{{ epics }}"><a href="/entregas/">Todas</a></li>
+                                        <li class="{{ all_epics }}"><a href="/entregas/">Todas</a></li>
                                         {% for t in request.user.team_set.all %}
+                                        {% if request.user.team_set.all.count > 1 %}
+                                        <li class="{% if e.team.id == t.id %}active{% endif %}">
+                                            <a href="javascript:">{{ t.name }}</a>
+                                            <ul>
+                                                <li class="{% if t.id == team_id %}{{ epics }}{% endif %}"><a href="/entregas/?team_id={{ t.id }}">Todas</a></li>
+                                                {% for ep in t.epic_set.all %}
+                                                <li class="{% if ep.id == e.id %}active{% endif %}"><a href="/entregas/{{ep.id}}/">{{ ep.name }}</a></li>
+                                                {% endfor %}
+                                                <li class="{% if t.id == team_id %}{{ new_epic }}{% endif %}"><a href="/entregas/nueva/?team_id={{ t.id }}">Nueva Entrega</a></li>
+                                            </ul>
+                                        </li>
+                                        {% else %}
                                         {% for ep in t.epic_set.all %}
                                         <li class="{% if ep.id == e.id %}active{% endif %}"><a href="/entregas/{{ep.id}}/">{{ ep.name }}</a></li>
                                         {% endfor %}
+                                        <li class="{{ new_epic }}"><a href="/entregas/nueva/?team_id={{ t.id }}">Nueva Entrega</a></li>
+                                        {% endif %}
                                         {% endfor %}
                                     </ul>
                                 </li>

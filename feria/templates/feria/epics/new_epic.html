@@ -1,0 +1,44 @@
+{% extends 'feria/base.html' %}
+{% load static %}
+
+{% block js %}
+<script type="text/javascript" src="{% static 'feria/js/plugins/editors/summernote/summernote.min.js' %}"></script>
+<script type="text/javascript" src="{% static 'feria/js/plugins/forms/styling/uniform.min.js' %}"></script>
+<script type="text/javascript">
+    $(function (){
+        $('.summernote').summernote();
+    });
+</script>
+<script type="text/javascript" src="{% static 'feria/js/plugins/forms/validation/validate.min.js' %}"></script>
+<script type="text/javascript" src="{% static 'feria/js/pages/form_validation.js' %}"></script>
+{% endblock %}
+
+{% block content %}
+<div class="page-header">
+    <div class="page-header-content">
+        <div class="page-title">
+            <h4>
+                <span class="text-semibold"><a href="/entregas/" style="color: black;">Entregas</a></span> - Nueva Entrega
+            </h4>
+        </div>
+    </div>
+</div>
+<div class="content">
+    <div class="row">
+        <form class="form-validate-jquery" method="POST" novalidate>
+            {% csrf_token %}
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <input class="form-control" type="text" name="name" required="required">
+                    <div class="heading-elements">
+                        <button type="submit" class="btn btn-primary heading-btn legitRipple">Guardar</button>
+                    </div>
+                </div>
+                <div class="panel-body">
+                    <textarea class="summernote" name="description" required="required"></textarea>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}

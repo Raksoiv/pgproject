@@ -1,0 +1,46 @@
+{% extends 'feria/base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="page-header">
+    <div class="page-header-content">
+        <div class="page-title">
+            <h4>
+                <span class="text-semibold"><a href="/entregas/" style="color: black;">Entregas</a></span>
+            </h4>
+        </div>
+    </div>
+</div>
+<div class="content">
+    {% for t in request.user.team_set.all %}
+    <div class="row">
+        {% for e in t.epic_set.all %}
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h6 id="name-div"><a href="/entregas/{{ e.id }}/">{{ e.name }}</a> &#183; <span class="text-muted">{{ t.name }}</span></h6>
+            </div>
+            <div class="panel-body">
+                <div id="description-div" class="content" style="padding-bottom: 40px;">{{ e.description|safe }}</div>
+                {% if e.feature_set.all %}
+                <div class="row">
+                    {% for f in e.feature_set.all|slice:":3" %}
+                    <div class="col-md-4">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h6><a href="/hdu/{{f.id}}/">{{f.name}}</a></h6>
+                            </div>
+                            <div class="panel-body">
+                                {{ f.description|safe }}
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+                {% endif %}
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}

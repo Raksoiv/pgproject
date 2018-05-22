@@ -6,10 +6,7 @@
 <script type="text/javascript" src="{% static 'feria/js/plugins/forms/styling/uniform.min.js' %}"></script>
 <script type="text/javascript">
 
-    function activate_form(initial_text) {
-        var div = document.createElement('div');
-        div.innerHTML = initial_text.trim();
-
+    function activate_form() {
         $('#name-div').hide();
         $('#name-input').show();
 
@@ -19,7 +16,7 @@
         $('#button-edit').hide();
         $('#button-save').show();
 
-        $('.summernote').summernote('insertNode', div.firstChild);
+        $('.summernote').summernote();
     }
 </script>
 {% endblock %}
@@ -29,37 +26,35 @@
     <div class="page-header-content">
         <div class="page-title">
             <h4>
-                <span class="text-semibold"><a href="/entregas/" style="color: black;">Entregas</a></span>
+                <span class="text-semibold"><a href="/entregas/" style="color: black;">Entregas</a></span> - {{ e.name }}
             </h4>
         </div>
     </div>
 </div>
 <div class="content">
-    {% for t in request.user.team_set.all %}
     <div class="row">
-        {% for e in t.epic_set.all %}
         <form method="POST">
             {% csrf_token %}
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    <h6 id="name-div"><a href="/entregas/{{ e.id }}/">{{ e.name }}</a> &#183; <span class="text-muted">{{t.name}}</span></h6>
+                    <h6 id="name-div"><a href="/entregas/{{ e.id }}/">{{ e.name }}</a> &#183; <span class="text-muted">{{ e.team.name }}</span></h6>
                     <input type="hidden" name="id" value="{{ e.id }}">
                     <input id="name-input" class="form-control" type="text" name="name" value="{{ e.name }}" style="display: none;">
                     <div class="heading-elements">
-                        <button id="button-edit" type="button" class="btn btn-warning heading-btn legitRipple" onclick="activate_form('{{ e.description|safe }}');">Editar</button>
+                        <button id="button-edit" type="button" class="btn btn-warning heading-btn legitRipple" onclick="activate_form();">Editar</button>
                         <button id="button-save" type="submit" class="btn btn-primary heading-btn legitRipple" style="display: none;">Guardar</button>
                     </div>
                 </div>
                 <div class="panel-body">
                     <div id="description-div" class="content" style="padding-bottom: 40px;">{{ e.description|safe }}</div>
-                    <textarea id="description-input" class="summernote" name="description" style="display: none;"></textarea>
+                    <textarea id="description-input" class="summernote" name="description" style="display: none;">{{ e.description|safe }}</textarea>
                     {% if e.feature_set.all %}
                     <div class="row">
-                        {% for f in e.feature_set.all|slice:":3" %}
+                        {% for f in e.feature_set.all %}
                         <div class="col-md-4">
                             <div class="panel panel-default">
                                 <div class="panel-heading">
-                                    <h6><a href="/caracteristicas/{{f.id}}/">{{f.name}}</a></h6>
+                                    <h6><a href="/hdu/{{f.id}}/">{{f.name}}</a></h6>
                                 </div>
                                 <div class="panel-body">
                                     {{ f.description|safe }}
@@ -72,8 +67,6 @@
                 </div>
             </div>
         </form>
-        {% endfor %}
     </div>
-    {% endfor %}
 </div>
 {% endblock %}

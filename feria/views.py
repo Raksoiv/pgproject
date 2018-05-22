@@ -1,7 +1,9 @@
-from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
+from django.shortcuts import render, redirect
+
 import feria.models as models
+import feria.security as security
 
 
 # Create your views here.
@@ -72,22 +74,66 @@ def board(request):
 
 @login_required
 def epics(request):
+    if request.GET.get('team_id'):
+        if not security.user_team(request, request.GET.get('team_id')):
+            return redirect('/entregas/')
+        epics_list = models.Epic.objects.filter(
+            team=models.Team.objects.get(pk=request.GET.get('team_id')))
+        return render(request, 'feria/epics/epics.html', {
+            'epics': 'active',
+            'team_id': int(request.GET.get('team_id')),
+            'epics_list': epics_list,
+        })
+    else:
+        return render(request, 'feria/epics/all_epics.html', {
+            'all_epics': 'active',
+        })
+
+
+@login_required
+def new_epic(request):
+    if not security.user_team(request, request.GET.get('team_id')):
+        return redirect('/entregas/')
+    if request.method == 'POST':
+        new_epic = models.Epic(
+            team=models.Team.objects.get(pk=request.GET.get('team_id')),
+            name=request.POST.get('name'),
+            description=request.POST.get('description'))
+        new_epic.save()
+    return render(request, 'feria/epics/new_epic.html', {
+        'team_id': int(request.GET.get('team_id')),
+        'new_epic': 'active',
+    })
+
+
+@login_required
+def epic_detail(request, epic_id):
+    if not security.user_epic(request, epic_id):
+        return redirect('/entregas/')
     if request.method == 'POST':
         e = models.Epic.objects.get(pk=request.POST.get('id'))
         e.name = request.POST.get('name')
         e.description = request.POST.get('description')
         e.save()
-    return render(request, 'feria/epics.html', {
-        'epics': 'active',
-    })
-
-
-def epic_detail(request, epic_id):
-    return render(request, 'feria/epic_detail.html', {
+    return render(request, 'feria/epics/epic_detail.html', {
             'e': models.Epic.objects.get(pk=epic_id),
         })
 
 
+@login_required
+def hdu(request, feature_id):
+    if not security.user_feature(request, feature_id):
+        return redirect('/entregas/')
+    if request.method == 'POST':
+        f = models.Feature.objects.get(pk=request.POST.get('id'))
+        f.name = request.POST.get('name')
+        f.description = request.POST.get('description')
+        f.criteria = request.POST.get('criteria')
+        f.save()
+    return render(request, 'feria/features/hdu.html')
+
+
+@login_required
 def forum(request):
     return render(
         request,
@@ -99,7 +145,10 @@ def forum(request):
         })
 
 
+@login_required
 def forum_detail(request, forum_id):
+    if not security.user_forum(request, forum_id):
+        return redirect('/foros/')
     f = models.Forum.objects.get(pk=forum_id)
     if request.method == 'POST':
         new_message = models.Message(
@@ -116,8 +165,11 @@ def forum_detail(request, forum_id):
         })
 
 
+@login_required
 def message_detail(request, message_id):
     message = models.Message.objects.get(pk=message_id)
+    if not security.user_forum(request, message.forum.id):
+        return redirect('/foros/')
     if request.method == 'POST':
         new_answer = models.Answer(
             message=message,
@@ -134,5 +186,6 @@ def message_detail(request, message_id):
         })
 
 
+@login_required
 def archivos(request):
     return render(request, 'feria/filesystem.html', {'filesystem': 'active'})
